@@ -1,0 +1,35 @@
+
+apply plugin: 'maven-publish'
+
+ext {
+    jarToPublish = {
+      file( 'ALVLibraryUtils.jar' )
+      }
+}
+
+
+
+publishing {
+    publications {
+        ALVLibraryUtils( MavenPublication ) {
+            group='alvLibraryUtilsgroup'
+            artifactId='alvLibraryUtils'
+            artifact jarToPublish            
+            version '1.0.4'
+            /* can specify a classifier if not encoded in the filename
+            artifact jarToPublish {
+                classifier 'theClassifier'
+            }
+            */
+        }
+    }
+    repositories {
+        maven {
+            url 'https://mavenalvserver.appspot.com/'
+            credentials {
+                username 'admin'
+                password 'admin'
+            }
+        }
+    }
+}
